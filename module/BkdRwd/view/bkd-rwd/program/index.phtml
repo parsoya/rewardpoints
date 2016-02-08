@@ -1,0 +1,50 @@
+<?php
+$title = 'Reward Programs';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'program', 'action'=>'add'));?>">Add new program | </a>
+    <a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'category', 'action'=>'index'));?>">Program Types</a>
+</p>
+<?php 
+
+if($paginator)
+{
+echo '<table class="table">';
+echo '<tr>';
+echo '<th>Title</th>';
+echo '    <th>Author</th>';
+echo '	<th>Created</th>';
+echo '    <th>&nbsp;</th>';
+echo '</tr>';
+}
+else
+{
+	echo 'There no programs';
+}
+?>
+
+<?php foreach ($paginator as $program) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($program->getTitle());?></td>
+    <td><?php if (is_object($program->getAuthor())) echo $this->escapeHtml($program->getAuthor()->getUsername());?></td>
+    <td><?php
+
+    // echo $this->escapeHtml($program->getCreated()->format('Y-m-d H:i:s'));?></td>
+     <td>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'product', 'action'=>'index', 'id' => $program->getId()));?>">Products</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'view', 'id' => $program->getId()));?>">View</a>
+		<a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'edit', 'id' => $program->getId()));?>">Edit</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment>
+            array('controller' => 'program', 'action'=>'delete', 'id' => $program->getId()));?>" onclick="return confirm('Do you really want to delete this record?')">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding', // All, Elastic, Jumping, Sliding
+                                    'bkd-rwd/search_pagination.phtml', array('route' => 'bkd-rwd/paginator-doctrine')); ?>

@@ -1,0 +1,11 @@
+<?php
+
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action', $this->url('bkd-rwd/default', array('controller' => 'product', 'action' => 'edit', 'id2' => $this->id), true)); 
+
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();

@@ -1,0 +1,51 @@
+<?php
+/*
+foreach($programs AS $program) {
+    echo $user->getDescription()." - ".$user->getCreated()->format('d.m.Y')."\n";
+    echo "    Reported by: ".$user->getReporter()->name."\n";
+    echo "    Assigned to: ".$user->getEngineer()->name."\n";
+    foreach($user->getProducts() AS $product) {
+        echo "    Platform: ".$product->name."\n";
+    }
+    echo "\n";
+}
+*/
+$title = 'My products';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+<!-- <a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'product', 'action'=>'add')); /*NOtice without true no param is send*/?>">Add new translation</a> -->
+    <a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'program', 'action'=>'index'), false);?>">&lt; Back to the programs | </a>
+    <a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'product', 'action'=>'add'), true);?>">Add New Product</a>
+</p>
+<?php 
+if($products)
+{
+echo '<table class="table">';
+echo '<tr>';
+echo '<th>Title</th>';
+echo '    <th>Text</th>';
+echo '    <th>Author</th>';
+echo '	<th>Created</th>';
+echo '    <th>&nbsp;</th>';
+echo '</tr>';
+}
+else
+{
+	echo $this->translate('There are no products');
+}
+?>
+<?php foreach ($products as $product) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($product->getTitle());?></td>
+    <td><?php echo $this->escapeHtml($product->getText());?></td>
+    <td><?php if (is_object($product->getAuthor())) echo $this->escapeHtml($product->getAuthor()->getUsername());?></td>
+    <td><?php if (is_object($product->getCreated())) echo $this->escapeHtml($product->getCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getArtcCreated() returns an object convert to string -->
+    <td>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment>
+            array('controller' => 'product', 'action'=>'delete', 'id2' => $product->getId()), true);?>" onclick="return confirm('Do you really want to delete the record?')">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

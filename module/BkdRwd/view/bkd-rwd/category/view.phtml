@@ -1,0 +1,53 @@
+<?php
+$title = 'Programs in category: '. $category->getName();
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+<a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'category', 'action'=>'index'));?>">Go to Categories |</a>
+<a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'program', 'action'=>'index'));?>">Go to all Programs</a>
+</p>
+<?php 
+
+if($category)
+{
+	$programs = $category->getPrograms();
+	if(count($programs)>0)
+	{
+		echo '<table class="table">';
+		echo '<tr>';
+		echo '<th>Title</th>';
+		echo '    <th>Author</th>';
+		echo '	<th>Created</th>';
+		echo '    <th>&nbsp;</th>';
+		echo '</tr>';
+		}
+		else
+		{
+			echo 'There are no programs.';
+		}
+}
+
+?>
+
+<?php
+
+ foreach ($programs as $program) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($program->getTitle());?></td>
+    <td><?php if (is_object($program->getAuthor())) echo $this->escapeHtml($program->getAuthor()->getUsername());?></td>
+    <td><?php echo $this->escapeHtml($program->getCreated()->format('Y-m-d H:i:s'));?></td>
+    
+    <td>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'product', 'action'=>'index', 'id' => $program->getId()));?>">Products</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'view', 'id' => $program->getId()));?>">View</a>
+		<a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'edit', 'id' => $program->getId()));?>">Edit</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment>
+            array('controller' => 'program', 'action'=>'delete', 'id' => $program->getId()));?>" onclick="return confirm('Do you really want to delete this record?')">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

@@ -1,0 +1,19 @@
+<?php
+if($isAllowedProducts)
+{
+	$form = $this->form;
+	$form->prepare();
+	$form->setAttribute('action', $this->url('bkd-rwd/default', array('controller' => 'product', 'action' => 'add'),true));
+	$form->setAttribute('method', 'post');
+
+	echo $this->form()->openTag($form);
+	echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}
+else
+{
+	?>  <a href="<?php echo $this->url('bkd-rwd/default', array('controller' => 'program', 'action'=>'index'), false);?>">&lt; Back to the programs </a>
+	<?php
+	echo '<p>Products are disabled for this program</p>';
+}
+?>

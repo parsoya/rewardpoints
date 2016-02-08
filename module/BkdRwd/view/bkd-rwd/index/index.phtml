@@ -1,0 +1,123 @@
+<?php
+$title = 'Latest programs';
+$this->headTitle($title);
+?>
+<h2><?php echo $this->escapeHtml($title); ?></h2>
+
+<?php
+if(!$programs)
+{
+    echo '<p>There no programs to show "Latest Programs".</p>';
+}
+else
+{
+    echo '<ul>';
+    foreach ($programs as $program) :
+        /*if (!$this->IsAllowed($program->getResource()->getName(), 'view')) {
+            continue;
+        } */
+?>
+        <hr>
+        <li>
+            <?php //echo $this->programIntro($program->getId(), 12); ?>
+        </li>
+<?php
+    endforeach;
+    echo '</ul>';
+}?>
+<?php 
+if($mostProductedPrograms)
+{
+echo '<b>Most producted programs</b>';
+echo '<table class="table">';
+echo '<tr>';
+echo '	  <th>Title</th>';
+//echo '    <th>Intro Text</th>';
+echo '    <th>Author</th>';
+//echo '    <th>Language</th>';
+echo '	  <th>Created</th>';
+echo '	  <th>Products</th>';
+echo '    <th>&nbsp;</th>';
+echo '</tr>';
+}
+else
+{
+	echo '<p>There no programs to show "Most Producted Programs".</p>';
+}
+?>
+
+<?php $counter = 0;
+if($mostProductedPrograms){
+foreach ($mostProductedPrograms as $program) : ?>
+<tr>
+    <td><a href="<?php 
+		echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+                                    array('controller' => 'program', 'action'=>'view', 'id' => $program->getId()));?>">
+									<?php echo $this->escapeHtml($program->getTitle());?></td>
+    <td><?php if (is_object($program->getAuthor())) echo $this->escapeHtml($program->getAuthor()->getUsername());?></td>
+    <td><?php echo $this->escapeHtml($program->getCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getCreated() returns an object convert to string -->
+	<td><?php echo $countOfProducts[$counter]; ?> </td>
+    <td>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'translation', 'action'=>'index', 'id' => $program->getId()));?>">Translations</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'product', 'action'=>'index', 'id' => $program->getId()));?>">Products</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'view', 'id' => $program->getId()));?>">View</a>
+		<a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'edit', 'id' => $program->getId()));?>">Edit</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment>
+            array('controller' => 'program', 'action'=>'delete', 'id' => $program->getId()));?>" onclick="return confirm('Do you really want to delete this record?')">Delete</a>
+    </td>
+</tr>
+<?php $counter++; endforeach; }?>
+</table>
+
+<?php 
+if($mostPreviewedPrograms)
+{
+echo '<b>Most previewed programs</b>';
+echo '<table class="table">';
+echo '<tr>';
+echo '	  <th>Title</th>';
+echo '    <th>Intro Text</th>';
+echo '    <th>Author</th>';
+echo '    <th>Language</th>';
+echo '	  <th>Created</th>';
+echo '	  <th>Previewed</th>';
+echo '    <th>&nbsp;</th>';
+echo '</tr>';
+}
+else
+{
+	echo '<p>There no programs to show "Most Previewed Programs".</p>';
+}
+?>
+
+<?php
+if($mostPreviewedPrograms)
+{
+foreach ($mostPreviewedPrograms as $program) : ?>
+<tr>
+    <td><a href="<?php 
+		echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+                                    array('controller' => 'program', 'action'=>'view', 'id' => $program->getId()));?>">
+									<?php echo $this->escapeHtml($program->getTitle());?></td>
+    <td><?php if (is_object($program->getAuthor())) echo $this->escapeHtml($program->getAuthor()->getUsername());?></td>
+    <td><?php echo $this->escapeHtml($program->getCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getCreated() returns an object convert to string -->
+	<td><?php echo $program->getViewCount(); ?> </td>
+    <td>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'translation', 'action'=>'index', 'id' => $program->getId()));?>">Translations</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'product', 'action'=>'index', 'id' => $program->getId()));?>">Products</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'view', 'id' => $program->getId()));?>">View</a>
+		<a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment> NOT ONLY bkd-rwd
+            array('controller' => 'program', 'action'=>'edit', 'id' => $program->getId()));?>">Edit</a>
+        <a href="<?php echo $this->url('bkd-rwd/default', // SUPER IMPORTANT use bkd-rwd/<segment>
+            array('controller' => 'program', 'action'=>'delete', 'id' => $program->getId()));?>" onclick="return confirm('Do you really want to delete this record?')">Delete</a>
+    </td>
+</tr>
+<?php endforeach; } ?>
+</table>

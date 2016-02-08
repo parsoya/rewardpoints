@@ -1,0 +1,46 @@
+{
+    "name":         "coolbkd/bkd-user",
+    "description":  "Authentication based on DoctrineORMModule",
+    "type":         "library",
+    "license":      "BSD-3-Clause",
+    "homepage":     "https://github.com/coolbkd/BkdUser",
+    "keywords": [
+        "zf2",
+        "bkd-user",
+        "doctrine-orm-module",
+        "doctrine"
+    ],
+    "authors": [
+        {
+            "name":      "Stoyan Cheresharov",
+            "email":     "stoyancheresharov@gmail.com",
+            "homepage":  "http://coolbkd.com/",
+            "role":      "Developer"
+        },
+        {
+            "name":      "Svetoslav Chonkov",
+            "email":     "svetoslav.chonkov@gmail.com",
+            "role":      "Developer"
+        },
+        {
+            "name":      "Nikola Vasilev",
+            "email":     "niko7vasilev@gmail.com",
+            "role":      "Developer"
+        },
+        {
+            "name":      "Stoyan Revov",
+            "email":     "st.revov@gmail.com",
+            "role":      "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "doctrine/doctrine-orm-module": ">=0.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "BkdUser\\": "src/"
+        }
+    }
+}

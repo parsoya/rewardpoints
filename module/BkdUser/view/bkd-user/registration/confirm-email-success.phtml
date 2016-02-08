@@ -1,0 +1,23 @@
+<?php
+/**
+ * BkdUser - Coolbkd Zend Framework 2 User Module
+ * 
+ * @link https://github.com/coolbkd/BkdUser for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 LightSoft 2005 Ltd. Bulgaria
+ * @license https://github.com/coolbkd/BkdUser/blob/master/LICENSE BSDLicense
+ * @author Stoyan Cheresharov <stoyan@coolbkd.com>
+ * @author Svetoslav Chonkov <svetoslav.chonkov@gmail.com>
+ * @author Nikola Vasilev <niko7vasilev@gmail.com>
+ * @author Stoyan Revov <st.revov@gmail.com>
+ * @author Martin Briglia <martin@mgscreativa.com>
+ */
+
+echo $this->partial('bkd-user/layout/nav-menu', array('navMenu' => $this->navMenu, 'user' => $this->identity()));
+
+?>
+
+<div class="jumbotron">
+  <h2>
+    <?php echo $this->translate('Thank you! Your registration has been confirmed.') ?>
+  </h2>
+</div>

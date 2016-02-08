@@ -1,0 +1,39 @@
+<?php
+/**
+ * BkdUser - Coolbkd Zend Framework 2 User Module
+ * 
+ * @link https://github.com/coolbkd/BkdUser for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 LightSoft 2005 Ltd. Bulgaria
+ * @license https://github.com/coolbkd/BkdUser/blob/master/LICENSE BSDLicense
+ * @author Stoyan Cheresharov <stoyan@coolbkd.com>
+ * @author Svetoslav Chonkov <svetoslav.chonkov@gmail.com>
+ * @author Nikola Vasilev <niko7vasilev@gmail.com>
+ * @author Stoyan Revov <st.revov@gmail.com>
+ * @author Martin Briglia <martin@mgscreativa.com>
+ */
+
+if($this->navMenu == true){
+  if($this->user) { ?> 
+    <a href="<?php echo $this->url('user-index');?>" class="btn btn-success">
+      <?php echo $this->translate('User Home'); ?>
+    </a>
+	<a href="<?php echo $this->url('user-register', array('action' => 'edit-profile'));?>" class="btn btn-success">
+	  <?php echo $this->translate('Edit Profile'); ?>
+	</a> 
+	<a href="<?php echo $this->url('user-index', array('action' => 'logout'))?>" class="btn btn-success">
+	  <?php echo $this->translate('Log Out'); ?>
+	</a>
+<?php
+  } else { ?>
+	<a href="<?php echo $this->url('user-index', array('action' => 'login'))?>" class="btn btn-success">
+	  <?php echo $this->translate('Log in'); ?>
+	</a>
+	<a href="<?php echo $this->url('user-register');?>" class="btn btn-success">
+	  <?php echo $this->translate('Sign Up'); ?>
+	</a>
+	<a href="<?php echo $this->url('user-register', array('action' => 'reset-password'));?>" class="btn btn-success">
+	  <?php echo $this->translate('Reset Password'); ?>
+	</a>
+<?php } ?>
+<?php } ?>
+<hr />
